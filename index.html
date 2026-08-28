@@ -7,371 +7,274 @@
 <meta name="description" content="Plataforma de análise quantitativa de volumes 3D micro-CT para pesquisa odontológica. USP/FOUSP — uso acadêmico, sem fins comerciais.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f3f2f1;        /* ice */
+    --midnight: #00021f;      /* deep navy (Vermont midnight, aprofundado) */
+    --midnight-2: #050a2e;
+    --ink: #00072e;
+    --body: #46535f;
+    --muted: #6f8494;         /* stone */
+    --lake: #00838f;          /* teal */
+    --lake-br: #00c2c9;       /* teal brilhante p/ fundo escuro */
+    --moss: #00ffb5;          /* moss */
+    --crimson: #ff3b5c;       /* sunset (realçado p/ escuro) */
+    --crimson-d: #dd314e;
+    --border: #e6e8e7;
+    --border-dark: #16224a;
+    --card: #ffffff;
+  }
   body {
-    background: #070b11;
-    color: #c7d3e2;
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    line-height: 1.65;
+    background: var(--bg);
+    color: var(--body);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px; line-height: 1.7;
     -webkit-font-smoothing: antialiased;
   }
-  a { color: #38e8ff; text-decoration: none; }
-  a:hover { color: #7af2ff; }
-  ::-webkit-scrollbar { width: 8px; }
-  ::-webkit-scrollbar-thumb { background: #1e2a3a; border-radius: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
+  a { color: var(--lake); text-decoration: none; }
+  a:hover { color: #006b76; }
+  h1, h2, h3, .brand-name { font-family: 'Inter', sans-serif; letter-spacing: -0.02em; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
 
-  /* ── Layout helpers ─────────────────────────────────── */
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-  .section { padding: 80px 0; }
-  .section + .section { border-top: 1px solid #16202e; }
-  .section-label {
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 96px 0; position: relative; }
+  .section.alt { background: var(--bg-alt); }
+  .section.dark { background: var(--midnight); color: #b9c6d9; }
+
+  .eyebrow {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 2.5px;
-    color: #5f7a94;
-    text-transform: uppercase;
-    margin-bottom: 16px;
+    font-size: 12px; font-weight: 500; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--lake);
+    text-align: center; margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
   }
+  .eyebrow::before, .eyebrow::after { content: ''; width: 24px; height: 1px; background: linear-gradient(90deg, transparent, var(--lake)); }
+  .eyebrow::before { background: linear-gradient(90deg, var(--lake), transparent); }
+  .dark .eyebrow { color: var(--lake-br); }
   .section-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    color: #eef4fb;
-    line-height: 1.2;
-    margin-bottom: 16px;
+    font-size: 34px; font-weight: 800; color: var(--ink);
+    line-height: 1.15; text-align: center; margin-bottom: 14px; letter-spacing: -.8px;
   }
-  .section-title .accent { color: #0ad6ff; }
-  .section-subtitle {
-    font-size: 16px;
-    color: #8296ac;
-    max-width: 620px;
-  }
+  .dark .section-title { color: #fff; }
+  .section-title .accent { color: var(--lake); }
+  .dark .section-title .accent { color: var(--lake-br); }
+  .section-sub { font-size: 17px; color: var(--muted); max-width: 640px; margin: 0 auto; text-align: center; }
+  .dark .section-sub { color: #8ba0bd; }
 
-  /* ── Card ───────────────────────────────────────────── */
-  .card {
-    background: #0d151f;
-    border: 1px solid #18242f;
-    border-radius: 12px;
-    padding: 24px;
-  }
-
-  /* ── Header/Nav ─────────────────────────────────────── */
+  /* ── Header ─────────────────────────────────────────── */
   header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    padding: 0 24px;
-    border-bottom: 1px solid #16202e;
-    background: linear-gradient(180deg, #0b111a, #080d15);
-    backdrop-filter: blur(8px);
+    position: sticky; top: 0; z-index: 100;
+    height: 62px; display: flex; align-items: center; gap: 20px;
+    padding: 0 24px; background: rgba(0,2,31,.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-dark);
   }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-  }
+  .logo { display: flex; align-items: center; gap: 11px; }
   .logo-badge {
-    width: 34px; height: 34px;
-    border-radius: 9px;
-    background: linear-gradient(135deg, #0ad6ff, #5b6bff);
+    width: 34px; height: 34px; border-radius: 8px;
+    background: linear-gradient(135deg, #00c2c9, #00838f);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700; font-size: 17px; color: #04121e;
-    box-shadow: 0 0 18px rgba(10,214,255,.4);
-    flex: 0 0 auto;
+    font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px;
+    color: #00021f; flex: 0 0 auto;
+    box-shadow: 0 0 16px rgba(0,194,201,.45);
   }
-  .logo-badge sup { font-size: 10px; vertical-align: super; }
-  .logo-text { line-height: 1; }
-  .logo-name {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600; font-size: 15px;
-    letter-spacing: .5px; color: #eef4fb;
-  }
-  .logo-sub {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 9.5px; letter-spacing: 2px; color: #5f7a94;
-    margin-top: 2px;
-  }
-  .header-sep { width: 1px; height: 26px; background: #1a2634; }
-  nav { display: flex; gap: 4px; font-size: 13px; margin-left: auto; }
-  nav a {
-    padding: 7px 14px; border-radius: 7px; color: #8296ac;
-    font-weight: 500; transition: background .15s, color .15s;
-  }
-  nav a:hover { background: #111d2b; color: #eaf3fb; }
+  .logo-badge sup { font-size: 9px; }
+  .brand-name { font-weight: 800; font-size: 16px; letter-spacing: .5px; color: #fff; line-height: 1; }
+  .brand-sub { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 2px; color: #6f86a8; margin-top: 3px; }
+  .header-sep { width: 1px; height: 26px; background: var(--border-dark); }
+  nav { display: flex; gap: 2px; margin-left: auto; }
+  nav a { padding: 8px 13px; border-radius: 7px; color: #a9bad0; font-size: 14px; font-weight: 500; transition: background .15s, color .15s; }
+  nav a:hover { background: #0e1a3f; color: #fff; }
   .btn-cta {
-    padding: 9px 18px; border-radius: 8px; border: 1px solid #2a6bff;
-    background: linear-gradient(135deg, #1e63ff, #0ad6ff);
-    color: #04121e; font-family: 'Manrope', sans-serif;
-    font-weight: 700; font-size: 13px; cursor: pointer;
-    box-shadow: 0 4px 16px rgba(10,120,255,.35);
-    white-space: nowrap; text-decoration: none;
-    transition: box-shadow .2s, transform .15s;
-    display: inline-block;
-  }
-  .btn-cta:hover { color: #04121e; box-shadow: 0 6px 24px rgba(10,120,255,.55); transform: translateY(-1px); }
-
-  /* ── Hero ───────────────────────────────────────────── */
-  #hero {
-    padding: 96px 0 72px;
-    position: relative;
-    overflow: hidden;
-  }
-  #hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: linear-gradient(#0e2033 1px, transparent 1px),
-                      linear-gradient(90deg, #0e2033 1px, transparent 1px);
-    background-size: 44px 44px;
-    opacity: .18;
-    pointer-events: none;
-  }
-  #hero::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(10,214,255,.06), transparent 70%);
-    pointer-events: none;
-  }
-  .hero-inner {
-    position: relative; z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-  }
-  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-  .badge {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px; letter-spacing: 1.5px;
-    padding: 4px 10px; border-radius: 20px;
-    border: 1px solid #1d4763; color: #7af2ff;
-    background: rgba(10,214,255,.06);
-  }
-  .badge.green { border-color: #1a4232; color: #22e59a; background: rgba(34,229,154,.05); }
-  .hero-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(28px, 4vw, 42px);
-    font-weight: 700; color: #eef4fb;
-    line-height: 1.15; margin-bottom: 16px;
-  }
-  .hero-title .accent { color: #0ad6ff; }
-  .hero-desc { font-size: 16px; color: #8296ac; margin-bottom: 32px; max-width: 480px; }
-  .hero-cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-  .btn-secondary {
     padding: 9px 18px; border-radius: 8px;
-    border: 1px solid #223144; color: #8fa6bd;
-    font-size: 13px; font-weight: 500;
+    background: linear-gradient(135deg, #00c2c9, #00747f);
+    color: #00021f; font-weight: 700; font-size: 14px; cursor: pointer;
+    white-space: nowrap; display: inline-block;
+    transition: transform .15s, box-shadow .2s;
+    box-shadow: 0 3px 14px rgba(0,194,201,.35);
+  }
+  .btn-cta:hover { color: #00021f; transform: translateY(-1px); box-shadow: 0 6px 22px rgba(0,194,201,.55); }
+
+  /* ── Hero (dark) ────────────────────────────────────── */
+  #hero {
+    background: var(--midnight); color: #c3d1e6;
+    padding: 92px 0 96px; position: relative; overflow: hidden;
+  }
+  #hero .grid-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(0,131,143,.10) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,131,143,.10) 1px, transparent 1px);
+    background-size: 40px 40px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 80%);
+            mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 80%);
+  }
+  #hero .glow { position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 50% 50% at 72% 42%, rgba(0,194,201,.16), transparent 70%),
+               radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,255,181,.08), transparent 70%); }
+  .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; gap: 52px; align-items: center; }
+  .hero-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--lake-br); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .hero-eyebrow .live { width: 7px; height: 7px; border-radius: 50%; background: var(--moss); box-shadow: 0 0 10px var(--moss); animation: blink 2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+  .hero-title { font-size: clamp(34px, 5vw, 52px); font-weight: 800; color: #fff; line-height: 1.06; margin-bottom: 20px; letter-spacing: -1.2px; }
+  .hero-title .accent { color: var(--lake-br); }
+  .hero-desc { font-size: 18px; color: #9fb2cc; max-width: 500px; margin-bottom: 30px; }
+  .hero-cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 26px; }
+  .btn-outline {
+    padding: 11px 22px; border-radius: 8px;
+    border: 1.5px solid #2a3a63; color: #cdd9ec;
+    font-size: 14px; font-weight: 600; background: transparent;
     transition: border-color .15s, color .15s;
   }
-  .btn-secondary:hover { border-color: #38e8ff; color: #eef4fb; }
-  .hero-img {
-    border-radius: 16px; border: 1px solid #18242f;
-    box-shadow: 0 0 60px rgba(10,214,255,.12), 0 24px 64px rgba(0,0,0,.6);
-    width: 100%; display: block;
-    background: #060a10;
-  }
-  .hero-img-caption {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px; color: #5f7a94; text-align: center;
-    margin-top: 8px; letter-spacing: 1px;
-  }
+  .btn-outline:hover { border-color: var(--lake-br); color: #fff; }
+  .btn-cta.lg, .btn-outline.lg { padding: 13px 26px; font-size: 15px; }
+  .hero-stats { display: flex; gap: 26px; flex-wrap: wrap; font-family: 'IBM Plex Mono', monospace; }
+  .hero-stat .v { font-size: 20px; font-weight: 600; color: #fff; }
+  .hero-stat .l { font-size: 11px; letter-spacing: 1px; color: #6f86a8; text-transform: uppercase; }
 
-  /* ── O que é (Rascunho) ─────────────────────────────── */
-  .draft-notice {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,143,93,.07); border: 1px solid rgba(255,143,93,.25);
-    border-radius: 8px; padding: 10px 16px; margin-bottom: 28px;
-    font-family: 'IBM Plex Mono', monospace; font-size: 11px;
-    color: #c9a86a; letter-spacing: 1px;
-  }
-  .draft-notice::before {
-    content: '◈'; font-size: 13px;
-  }
-  .body-text { font-size: 16px; color: #a8bbd0; line-height: 1.75; margin-bottom: 20px; }
-  .body-text strong { color: #eef4fb; font-weight: 600; }
-
-  /* ── Funcionalidades ─────────────────────────────────── */
-  .features-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  .feature-card {
-    background: #0d151f;
-    border: 1px solid #18242f;
-    border-radius: 12px;
+  /* Viewport SVG */
+  .viewport {
+    position: relative; border: 1px solid #1c2c56; border-radius: 14px;
+    background: linear-gradient(160deg, #030826, #01030f);
+    box-shadow: 0 24px 60px rgba(0,0,0,.5), inset 0 0 60px rgba(0,131,143,.06);
     overflow: hidden;
-    transition: border-color .2s, box-shadow .2s;
   }
-  .feature-card:hover {
-    border-color: #1d4763;
-    box-shadow: 0 8px 32px rgba(10,214,255,.08);
+  .viewport-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px; border-bottom: 1px solid #12203f;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px; color: #7f95b8;
   }
-  .feature-img {
-    width: 100%; display: block;
-    border-bottom: 1px solid #18242f;
-    background: #060a10;
-  }
-  .feature-body { padding: 18px 20px; }
-  .feature-tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 9.5px; letter-spacing: 1.5px; color: #5f7a94;
-    text-transform: uppercase; margin-bottom: 6px;
-  }
-  .feature-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 16px; font-weight: 600; color: #eef4fb;
-    margin-bottom: 6px;
-  }
-  .feature-desc { font-size: 13px; color: #7f97ae; line-height: 1.6; }
+  .viewport-top .tag { color: var(--lake-br); display: flex; align-items: center; gap: 7px; }
+  .viewport-top .tag::before { content:''; width:6px;height:6px;border-radius:50%;background:var(--moss);box-shadow:0 0 8px var(--moss); }
+  .viewport svg { display: block; width: 100%; height: auto; }
+  .tooth3d { position: relative; width: 100%; aspect-ratio: 1 / 1; }
+  .tooth-vid { width: 100%; height: 100%; object-fit: cover; display: block;
+    -webkit-mask-image: radial-gradient(circle at 50% 47%, #000 58%, transparent 90%);
+            mask-image: radial-gradient(circle at 50% 47%, #000 58%, transparent 90%); }
+  .scanline { animation: scan 3.6s cubic-bezier(.5,0,.5,1) infinite; }
+  @keyframes scan { 0%{transform:translateY(0);} 50%{transform:translateY(210px);} 100%{transform:translateY(0);} }
+  .pulse-core { animation: corepulse 3s ease-in-out infinite; transform-origin: center; }
+  @keyframes corepulse { 0%,100%{opacity:.85;} 50%{opacity:1;} }
 
-  /* ── Princípio 1 ─────────────────────────────────────── */
-  #principio {
-    background: linear-gradient(135deg, #080f19, #060a10);
+  /* ── Features ───────────────────────────────────────── */
+  .feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; padding: 46px 0; }
+  .feature-row + .feature-row { border-top: 1px solid var(--border); }
+  .feature-row.rev .feature-media { order: -1; }
+  .feature-tag { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--lake); margin-bottom: 12px; }
+  .feature-title { font-size: 23px; font-weight: 700; color: var(--ink); margin-bottom: 12px; line-height: 1.25; }
+  .feature-desc { font-size: 15.5px; color: var(--body); line-height: 1.75; }
+  .feature-media { position: relative; }
+  .feature-media .frame {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid #d7dcda; background: #01030f;
+    box-shadow: 0 16px 40px rgba(0,7,46,.12);
   }
+  .feature-media img { width: 100%; display: block; }
+  .shot-ph { aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center;
+    background: repeating-linear-gradient(45deg, #01030f, #01030f 12px, #050c22 12px, #050c22 24px);
+    color: #5f7aa0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-align: center; padding: 20px; letter-spacing: .5px; }
+  /* HUD corner ticks */
+  .frame::before, .frame::after, .feature-media .tick-b::before, .feature-media .tick-b::after {
+    content: ''; position: absolute; width: 14px; height: 14px; z-index: 2; pointer-events: none; }
+  .frame::before { top: 8px; left: 8px; border-top: 2px solid var(--lake-br); border-left: 2px solid var(--lake-br); }
+  .frame::after { top: 8px; right: 8px; border-top: 2px solid var(--lake-br); border-right: 2px solid var(--lake-br); }
+  .feature-media .tick-b { position: absolute; inset: 0; pointer-events: none; }
+  .feature-media .tick-b::before { bottom: 8px; left: 8px; border-bottom: 2px solid var(--lake-br); border-left: 2px solid var(--lake-br); }
+  .feature-media .tick-b::after { bottom: 8px; right: 8px; border-bottom: 2px solid var(--lake-br); border-right: 2px solid var(--lake-br); }
+
+  /* ── About ──────────────────────────────────────────── */
+  .about-text { max-width: 720px; margin: 32px auto 0; }
+  .about-text p { font-size: 16px; color: var(--body); line-height: 1.85; margin-bottom: 18px; }
+  .about-text strong { color: var(--ink); font-weight: 700; }
+  .validation-note {
+    max-width: 720px; margin: 26px auto 0; padding: 16px 20px; border-radius: 12px;
+    background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--moss);
+    font-size: 14px; color: #56646f; line-height: 1.7;
+  }
+  .validation-note strong { color: var(--ink); }
+  .validation-note .lbl { font-family: 'IBM Plex Mono', monospace; color: var(--lake); }
+
+  /* ── Princípio (spec panel dark) ────────────────────── */
   .principle-box {
-    background: rgba(10,214,255,.04);
-    border: 1px solid rgba(10,214,255,.18);
-    border-radius: 16px;
-    padding: 36px 40px;
-    position: relative;
-    overflow: hidden;
+    max-width: 840px; margin: 36px auto 0; border-radius: 16px; overflow: hidden;
+    background: linear-gradient(160deg, #050b2c, #01030f);
+    border: 1px solid #16224a; box-shadow: 0 24px 60px rgba(0,0,0,.4);
   }
-  .principle-box::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, #0ad6ff, #5b6bff, transparent);
-  }
-  .principle-number {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px; letter-spacing: 2px; color: #0ad6ff;
-    margin-bottom: 12px;
-  }
-  .principle-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 20px; font-weight: 700; color: #eef4fb;
-    margin-bottom: 16px;
-  }
-  .principle-text { font-size: 15px; color: #a8bbd0; line-height: 1.75; }
-  .principle-text strong { color: #eef4fb; }
-  .principle-meta {
-    margin-top: 20px; display: flex; gap: 24px; flex-wrap: wrap;
-  }
-  .principle-meta-item {
-    display: flex; align-items: center; gap: 8px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px; color: #5f7a94;
-  }
-  .dot { width: 6px; height: 6px; border-radius: 50%; background: #22e59a; flex: 0 0 auto; }
+  .principle-head { display: flex; align-items: center; gap: 10px; padding: 14px 22px; border-bottom: 1px solid #14213f; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1.5px; color: #7f95b8; }
+  .principle-head .d { width: 10px; height: 10px; border-radius: 50%; }
+  .principle-head .d.r { background: var(--crimson); } .principle-head .d.y { background: #ffb84d; } .principle-head .d.g { background: var(--moss); }
+  .principle-body { padding: 30px 32px 34px; }
+  .principle-number { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 1.5px; color: var(--crimson); margin-bottom: 12px; }
+  .principle-title { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 14px; letter-spacing: -.4px; }
+  .principle-text { font-size: 15.5px; color: #a7b7d0; line-height: 1.8; }
+  .principle-text strong { color: #fff; }
+  .principle-meta { margin-top: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .principle-meta-item { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8fb9c4; background: #020617; border: 1px solid #12203f; padding: 10px 14px; border-radius: 8px; }
+  .principle-meta-item .k { color: var(--moss); }
 
-  /* ── Stack ───────────────────────────────────────────── */
-  .stack-grid {
-    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px;
-  }
-  .stack-chip {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px; padding: 8px 14px;
-    border-radius: 8px; border: 1px solid #18242f;
-    background: #0d151f; color: #c7d3e2;
-    display: flex; align-items: center; gap: 8px;
-    transition: border-color .15s;
-  }
-  .stack-chip:hover { border-color: #1d4763; }
-  .stack-chip .chip-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: #0ad6ff; flex: 0 0 auto;
-  }
-  .stack-chip .chip-dot.green { background: #22e59a; }
-  .stack-chip .chip-dot.purple { background: #8f6bff; }
-  .stack-chip .chip-dot.orange { background: #ff8f5d; }
-  .stack-note {
-    margin-top: 20px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px; color: #5f7a94; letter-spacing: .5px;
-  }
+  /* ── Stack ──────────────────────────────────────────── */
+  .stack-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 36px; }
+  .stack-chip { font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 9px 15px; border-radius: 8px; border: 1px solid var(--border); background: #fff; color: #3f5262; display: flex; align-items: center; gap: 8px; transition: border-color .15s, transform .15s; }
+  .stack-chip:hover { border-color: var(--lake); transform: translateY(-2px); }
+  .chip-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lake); flex: 0 0 auto; }
+  .chip-dot.moss { background: #06c98f; } .chip-dot.amber { background: #eaa14a; } .chip-dot.violet { background: #8a6bff; }
+  .stack-note { margin-top: 22px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); letter-spacing: .3px; }
 
-  /* ── Vínculo institucional ───────────────────────────── */
-  .institution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
-  .institution-item {
-    background: #0d151f; border: 1px solid #18242f;
-    border-radius: 12px; padding: 24px;
-  }
-  .institution-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px; letter-spacing: 1.8px; color: #5f7a94;
-    text-transform: uppercase; margin-bottom: 8px;
-  }
-  .institution-value {
-    font-size: 15px; font-weight: 600; color: #eef4fb; line-height: 1.4;
-  }
-  .institution-sub { font-size: 13px; color: #7f97ae; margin-top: 4px; }
-  .hosting-notice {
-    margin-top: 24px;
-    padding: 14px 18px;
-    background: rgba(255,143,93,.05); border: 1px solid rgba(255,143,93,.2);
-    border-radius: 10px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px; color: #c9a86a; letter-spacing: .5px; line-height: 1.7;
-  }
+  /* ── Institucional ──────────────────────────────────── */
+  .institution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 880px; margin: 36px auto 0; }
+  .institution-item { position: relative; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 24px; transition: border-color .15s; }
+  .institution-item:hover { border-color: var(--lake); }
+  .institution-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+  .institution-value { font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .institution-sub { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+  .hosting-notice { max-width: 880px; margin: 22px auto 0; padding: 14px 18px; background: #fff; border: 1px solid var(--border); border-left: 3px solid #eaa14a; border-radius: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6a7887; line-height: 1.7; }
 
-  /* ── Rodapé ──────────────────────────────────────────── */
-  footer {
-    border-top: 1px solid #16202e;
-    padding: 40px 0;
-    background: #080d15;
-  }
-  .footer-inner {
-    display: flex; flex-wrap: wrap;
-    align-items: center; justify-content: space-between;
-    gap: 16px;
-  }
-  .footer-logo { display: flex; align-items: center; gap: 10px; }
-  .footer-links { display: flex; gap: 20px; }
-  .footer-links a {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px; color: #5f7a94; letter-spacing: .5px;
-    transition: color .15s;
-  }
-  .footer-links a:hover { color: #38e8ff; }
-  .footer-right {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10.5px; color: #5f7a94; text-align: right; line-height: 1.7;
-  }
+  /* ── CTA band (dark) ────────────────────────────────── */
+  #cta { background: var(--midnight); color: #c3d1e6; text-align: center; position: relative; overflow: hidden; }
+  #cta .grid-bg { position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(0,131,143,.10) 1px, transparent 1px), linear-gradient(90deg, rgba(0,131,143,.10) 1px, transparent 1px);
+    background-size: 40px 40px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 90% at 50% 50%, #000, transparent 75%); mask-image: radial-gradient(ellipse 70% 90% at 50% 50%, #000, transparent 75%); }
+  #cta .glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 50% 60% at 50% 30%, rgba(0,194,201,.15), transparent 70%); }
+  #cta .container { position: relative; z-index: 1; }
 
-  /* ── Responsive ──────────────────────────────────────── */
-  @media (max-width: 768px) {
-    .hero-inner { grid-template-columns: 1fr; }
-    .features-grid { grid-template-columns: 1fr; }
-    .institution-grid { grid-template-columns: 1fr; }
+  /* ── Footer ─────────────────────────────────────────── */
+  footer { background: #00010f; padding: 40px 0; border-top: 1px solid var(--border-dark); }
+  .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+  .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+  .footer-links a { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7f95b8; font-weight: 400; }
+  .footer-links a:hover { color: var(--lake-br); }
+  .footer-right { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #55688a; text-align: right; line-height: 1.8; }
+
+  /* ── Reveal ─────────────────────────────────────────── */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .scanline, .pulse-core, .hero-eyebrow .live { animation: none; } }
+
+  @media (max-width: 820px) {
     nav { display: none; }
-    .section-title { font-size: 26px; }
-    .section { padding: 56px 0; }
-    .principle-box { padding: 24px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+    .feature-row { grid-template-columns: 1fr; gap: 24px; padding: 36px 0; }
+    .feature-row.rev .feature-media { order: 0; }
+    .institution-grid { grid-template-columns: 1fr; }
+    .section { padding: 68px 0; }
+    .section-title { font-size: 27px; }
+    .principle-body { padding: 24px 22px; }
   }
-
-  @keyframes pulseDot { 0%,100%{opacity:.35;} 50%{opacity:1;} }
-  .pulse { animation: pulseDot 2s infinite; }
 </style>
 </head>
 <body>
 
-<!-- ══ HEADER ═══════════════════════════════════════════════════════════ -->
+<!-- ══ HEADER ═══════════════════════════════════════════ -->
 <header>
-  <a href="#" class="logo">
+  <a href="#hero" class="logo">
     <div class="logo-badge">D<sup>3</sup></div>
-    <div class="logo-text">
-      <div class="logo-name">DCUBIC</div>
-      <div class="logo-sub">IMAGE ANALYSIS</div>
+    <div>
+      <div class="brand-name">DCUBIC</div>
+      <div class="brand-sub">IMAGE ANALYSIS</div>
     </div>
   </a>
   <div class="header-sep"></div>
@@ -385,205 +288,173 @@
   <a href="#" class="btn-cta">Acessar o app</a>
 </header>
 
-<!-- ══ HERO ═════════════════════════════════════════════════════════════ -->
-<section id="hero" class="section">
+<!-- ══ HERO ═════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="glow"></div>
   <div class="container">
     <div class="hero-inner">
       <div>
-        <div class="hero-badges">
-          <span class="badge">PESQUISA ACADÊMICA</span>
-          <span class="badge green pulse">USP/FOUSP</span>
-          <span class="badge">SEM FINS COMERCIAIS</span>
-          <span class="badge">OPEN-SOURCE</span>
-        </div>
-        <h1 class="hero-title">
-          DCubic<br>
-          <span class="accent">Image System</span><br>
-          Platform
-        </h1>
+        <div class="hero-eyebrow"><span class="live"></span> Micro-CT Interface · 3D Viewer</div>
+        <h1 class="hero-title">Estudo Morfológico-Estrutural<br><span class="accent">Odontorradicular</span></h1>
         <p class="hero-desc">
-          Plataforma de análise quantitativa de volumes 3D micro-CT para pesquisa odontológica —
-          visualização triplanar, segmentação multi-tecido, render 3D interativo e métricas em mm³.
+          Morfologia interna e externa a partir de micro-CT.
         </p>
+        <div class="hero-eyebrow">FO-USP · Depto. de Dentística</div>
         <div class="hero-cta">
-          <a href="#" class="btn-cta">Acessar o app</a>
-          <a href="https://github.com/Abefisio" class="btn-secondary" target="_blank" rel="noopener">GitHub →</a>
+          <a href="#" class="btn-cta lg">Acessar o app</a>
+          <a href="https://github.com/Abefisio/dcubic-app" class="btn-outline lg" target="_blank" rel="noopener">Ver no GitHub</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="v">3</div><div class="l">Formatos · DICOM/TIFF/NIfTI</div></div>
+          <div class="hero-stat"><div class="v">4</div><div class="l">Módulos integrados</div></div>
+          <div class="hero-stat"><div class="v">mm³</div><div class="l">Métricas morfométricas</div></div>
         </div>
       </div>
-      <div>
-        <img src="screenshots/screen_render3d.png" alt="Render 3D de volume micro-CT segmentado por tecido" class="hero-img">
-        <p class="hero-img-caption">RENDER 3D · MARCHING CUBES · PHANTOM SINTÉTICO DE VALIDAÇÃO</p>
+
+      <div class="viewport">
+        <div class="tooth3d" style="display:flex;justify-content:center;align-items:center;width:100%">
+          <video class="tooth-vid" autoplay muted loop playsinline style="width:100%;height:auto;object-fit:contain;border-radius:8px">
+            <source src="videos/molar_transparente.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ O QUE É (RASCUNHO PARA REVISÃO) ═════════════════════════════════ -->
+<!-- ══ FUNCIONALIDADES ══════════════════════════════════ -->
+<section id="funcionalidades" class="section alt">
+  <div class="container">
+    <div class="eyebrow reveal">Funcionalidades</div>
+    <h2 class="section-title reveal">Quatro módulos <span class="accent">integrados</span></h2>
+    <p class="section-sub reveal">Todas as funcionalidades operam sobre os voxels brutos — as configurações visuais nunca alteram os dados.</p>
+
+    <div style="margin-top: 44px;">
+
+      <div class="feature-row reveal">
+        <div>
+          <div class="feature-tag">// módulo 01 — triplanar 2D</div>
+          <div class="feature-title">Visualização triplanar em escala de cinza</div>
+          <p class="feature-desc">Cortes axial, sagital e coronal com escala de cinza global e crosshair sincronizado entre os três planos. Navegação por índice de voxel com sliders independentes.</p>
+        </div>
+        <div class="feature-media">
+          <div class="frame"><img data-shot src="screenshots/screen_triplanar.png" alt="Triplanar 2D · crosshair sincronizado"></div>
+          <div class="tick-b"></div>
+        </div>
+      </div>
+
+      <div class="feature-row rev reveal">
+        <div>
+          <div class="feature-tag">// módulo 02 — segmentação</div>
+          <div class="feature-title">Segmentação multi-tecido por threshold</div>
+          <p class="feature-desc">Limiarização independente para fundo, tecido mole, esmalte/osso e núcleo denso. Overlay RGBA em tempo real sobre os voxels brutos, com contagem por compartimento.</p>
+        </div>
+        <div class="feature-media">
+          <div class="frame"><img data-shot src="screenshots/screen_segmentacao.png" alt="Segmentação multi-tecido · overlay RGBA"></div>
+          <div class="tick-b"></div>
+        </div>
+      </div>
+
+      <div class="feature-row reveal">
+        <div>
+          <div class="feature-tag">// módulo 03 — render 3D</div>
+          <div class="feature-title">Render 3D interativo via marching cubes</div>
+          <p class="feature-desc">Malhas 3D geradas por marching cubes a partir dos masks de voxels brutos. Visualização WebGL (Plotly Mesh3d) com rotação, zoom e pan no navegador. Opacidade por tecido e plano de corte Z ajustáveis.</p>
+        </div>
+        <div class="feature-media">
+          <div class="frame"><img data-shot src="screenshots/screen_render3d.png" alt="Render 3D · marching cubes · WebGL"></div>
+          <div class="tick-b"></div>
+        </div>
+      </div>
+
+      <div class="feature-row rev reveal">
+        <div>
+          <div class="feature-tag">// módulo 04 — métricas &amp; export</div>
+          <div class="feature-title">Métricas quantitativas e exportação</div>
+          <p class="feature-desc">Volume (mm³) por contagem de voxels, área de superfície (mm²) por soma de triângulos e distância euclidiana entre dois pontos. Exportação STL/OBJ por tecido e relatório PDF.</p>
+        </div>
+        <div class="feature-media">
+          <div class="frame"><img data-shot src="screenshots/screen_metricas.png" alt="Métricas quantitativas · STL/OBJ/PDF"></div>
+          <div class="tick-b"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ O QUE É / SOBRE ══════════════════════════════════ -->
 <section id="sobre" class="section">
   <div class="container">
-    <div class="section-label">O que é</div>
-    <h2 class="section-title">Análise volumétrica <span class="accent">micro-CT</span></h2>
+    <div class="eyebrow reveal">O que é</div>
+    <h2 class="section-title reveal">Sobre o <span class="accent">projeto DCubic</span></h2>
 
-    <div class="draft-notice">RASCUNHO PARA REVISÃO — não é texto final; aguarda aprovação do Dr. Abe</div>
+    <div class="about-text reveal">
+      <p>O <strong>DCubic Image System Platform</strong> é uma plataforma computacional de código aberto para a análise quantitativa de volumes tridimensionais obtidos por microtomografia computadorizada (micro-CT), no contexto da pesquisa odontológica da <strong>Faculdade de Odontologia da Universidade de São Paulo (FOUSP/USP)</strong>.</p>
+      <p>Permite a visualização triplanar de volumes DICOM, TIFF e NIfTI, a segmentação interativa de tecidos por limiar de intensidade e a geração de métricas morfométricas rigorosas — volume (mm³) e área de superfície (mm²) por compartimento tecidual — em conformidade com os princípios de integridade de dados científicos.</p>
+      <p>Desenvolvida inteiramente com bibliotecas de código aberto, destina-se exclusivamente à pesquisa acadêmica sem fins comerciais. Todo o pipeline respeita um princípio fundamental de separação entre dado bruto e exibição visual.</p>
+    </div>
 
-    <p class="body-text">
-      O <strong>DCubic Image System Platform</strong> é uma plataforma computacional de código aberto
-      desenvolvida para a análise quantitativa de volumes tridimensionais obtidos por microtomografia
-      computadorizada (micro-CT) no contexto da pesquisa odontológica da
-      <strong>Faculdade de Odontologia da Universidade de São Paulo (FOUSP/USP)</strong>.
-      A plataforma permite a visualização triplanar de volumes DICOM, TIFF e NIfTI, a segmentação
-      interativa de tecidos por limiar de intensidade e a geração de métricas morfométricas
-      rigorosas — volume (mm³) e área de superfície (mm²) por compartimento tecidual —
-      em conformidade com os princípios de integridade de dados científicos.
-    </p>
-    <p class="body-text">
-      Desenvolvida inteiramente com bibliotecas de código aberto (Python, Streamlit, PyVista,
-      scikit-image e Plotly), a plataforma é destinada exclusivamente à pesquisa acadêmica
-      sem fins comerciais. Todo o pipeline de análise respeita um princípio fundamental de
-      separação entre dado bruto e exibição visual, garantindo que nenhuma configuração gráfica
-      interfira nos valores calculados.
-    </p>
-    <div style="margin-top:20px;padding:14px 18px;background:rgba(91,107,255,.05);border:1px solid rgba(91,107,255,.2);border-radius:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#8296ac;line-height:1.7;">
-      <strong style="color:#eef4fb;">Nota de validação:</strong>
-      a integração com os formatos DICOM, TIFF e NIfTI está implementada no carregador universal.
-      A validação até o momento foi realizada com um <em>volume sintético de teste</em>
-      (phantom numérico gerado em memória), que simula o contraste típico de micro-CT dental.
-      Testes com arquivos reais de micro-CT estão em andamento — resultados clínicos ou científicos
-      definitivos não devem ser inferidos a partir desta versão de desenvolvimento.
+    <div class="validation-note reveal">
+      <span class="lbl">[nota de validação]</span> <strong>&nbsp;</strong>a integração com DICOM, TIFF e NIfTI está implementada no carregador universal. A validação até o momento foi realizada com um <em>volume sintético de teste</em> (phantom numérico gerado em memória), que simula o contraste típico de micro-CT dental. Testes com arquivos reais estão em andamento — resultados clínicos ou científicos definitivos não devem ser inferidos a partir desta versão.
     </div>
   </div>
 </section>
 
-<!-- ══ FUNCIONALIDADES ═══════════════════════════════════════════════════ -->
-<section id="funcionalidades" class="section">
+<!-- ══ PRINCÍPIO ════════════════════════════════════════ -->
+<section id="principio" class="section alt">
   <div class="container">
-    <div class="section-label">Funcionalidades</div>
-    <h2 class="section-title">Quatro módulos <span class="accent">integrados</span></h2>
-    <p class="section-subtitle">
-      Todas as funcionalidades operam sobre os voxels brutos — as configurações visuais nunca alteram os dados.
-    </p>
+    <div class="eyebrow reveal">Integridade científica</div>
+    <h2 class="section-title reveal">Separação <span class="accent">dado × exibição</span></h2>
 
-    <div class="features-grid" style="margin-top: 40px;">
-
-      <div class="feature-card">
-        <img src="screenshots/screen_triplanar.png"
-             alt="Visualização triplanar 2D com crosshair sincronizado" class="feature-img">
-        <div class="feature-body">
-          <div class="feature-tag">Módulo 01 · Triplanar 2D</div>
-          <div class="feature-title">Visualização triplanar em escala de cinza</div>
-          <p class="feature-desc">
-            Cortes axial, sagital e coronal com escala de cinza global e crosshair ciano sincronizado
-            entre os três planos. Navegação por índice de voxel com sliders independentes.
-          </p>
+    <div class="principle-box reveal">
+      <div class="principle-head"><span class="d r"></span><span class="d y"></span><span class="d g"></span>&nbsp; dcubic · core-principle.spec</div>
+      <div class="principle-body">
+        <div class="principle-number">PRINCÍPIO 1 · INVIOLÁVEL</div>
+        <div class="principle-title">Os dados brutos nunca são alterados.</div>
+        <p class="principle-text">Qualquer configuração visual — paleta de cor, brilho, threshold de renderização, opacidade — <strong>nunca pode alterar os dados brutos do volume nem os valores calculados</strong> (volume em mm³, área de superfície, distâncias, densidade). Toda métrica é sempre calculada a partir da <strong>matriz de voxels original</strong>, nunca da imagem renderizada ou da malha 3D.</p>
+        <div class="principle-meta">
+          <div class="principle-meta-item"><span class="k">volumes_mm3</span> = voxels × espaçamento³</div>
+          <div class="principle-meta-item"><span class="k">areas_mm2</span>&nbsp;&nbsp; = Σ triângulos(malha marching cubes)</div>
+          <div class="principle-meta-item"><span class="k">distâncias</span>&nbsp;&nbsp; = euclidiana(voxel_A × spacing, voxel_B × spacing)</div>
         </div>
-      </div>
-
-      <div class="feature-card">
-        <img src="screenshots/screen_segmentacao.png"
-             alt="Segmentação multi-tecido com overlay colorido" class="feature-img">
-        <div class="feature-body">
-          <div class="feature-tag">Módulo 02 · Segmentação</div>
-          <div class="feature-title">Segmentação multi-tecido por threshold</div>
-          <p class="feature-desc">
-            Limiarização independente para fundo, tecido mole, esmalte/osso e núcleo denso.
-            Overlay RGBA em tempo real sobre os voxels brutos, contagem de voxels por compartimento.
-          </p>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <img src="screenshots/screen_render3d.png"
-             alt="Render 3D interativo com marching cubes" class="feature-img">
-        <div class="feature-body">
-          <div class="feature-tag">Módulo 03 · Render 3D</div>
-          <div class="feature-title">Render 3D interativo via marching cubes</div>
-          <p class="feature-desc">
-            Malhas 3D geradas por marching cubes a partir dos masks de voxels brutos.
-            Visualização WebGL (Plotly Mesh3d): rotação, zoom e pan direto no navegador.
-            Opacidade por tecido e plano de corte Z ajustáveis.
-          </p>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <img src="screenshots/screen_metricas.png"
-             alt="Métricas quantitativas e exportação" class="feature-img">
-        <div class="feature-body">
-          <div class="feature-tag">Módulo 04 · Métricas & Export</div>
-          <div class="feature-title">Métricas quantitativas e exportação</div>
-          <p class="feature-desc">
-            Volume (mm³) por voxel-contagem, área de superfície (mm²) por soma de triângulos,
-            distância euclidiana entre dois pontos. Exportação STL/OBJ por tecido e
-            relatório PDF gerado com reportlab.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ PRINCÍPIO 1 ══════════════════════════════════════════════════════ -->
-<section id="principio" class="section" style="background: linear-gradient(135deg, #080f19, #060a10);">
-  <div class="container">
-    <div class="section-label">Integridade científica</div>
-    <h2 class="section-title">Separação <span class="accent">dado × exibição</span></h2>
-
-    <div class="principle-box" style="margin-top: 32px;">
-      <div class="principle-number">PRINCÍPIO 1 (INVIOLÁVEL)</div>
-      <div class="principle-title">Os dados brutos nunca são alterados.</div>
-      <p class="principle-text">
-        Qualquer configuração visual — paleta de cor, brilho, threshold de renderização, opacidade —
-        <strong>nunca pode alterar os dados brutos do volume nem os valores calculados</strong>
-        (volume em mm³, área de superfície, distâncias, densidade).
-        Toda métrica numérica é calculada sempre a partir da <strong>matriz de voxels original</strong>,
-        nunca da imagem renderizada ou da malha 3D gerada.
-      </p>
-      <div class="principle-meta">
-        <div class="principle-meta-item"><span class="dot"></span> volumes_mm3 = voxels × espaçamento³</div>
-        <div class="principle-meta-item"><span class="dot"></span> areas_mm2 = Σ triângulos(malha marching cubes)</div>
-        <div class="principle-meta-item"><span class="dot"></span> distâncias = euclidiana(voxel_A × spacing, voxel_B × spacing)</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ STACK ═════════════════════════════════════════════════════════════ -->
+<!-- ══ STACK ════════════════════════════════════════════ -->
 <section id="stack" class="section">
   <div class="container">
-    <div class="section-label">Tecnologia</div>
-    <h2 class="section-title">Stack <span class="accent">100% open-source</span></h2>
-    <p class="section-subtitle">
-      Todas as bibliotecas utilizadas são de código aberto com licenças permissivas, adequadas para pesquisa acadêmica.
-    </p>
+    <div class="eyebrow reveal">Tecnologia</div>
+    <h2 class="section-title reveal">Stack <span class="accent">100% open-source</span></h2>
+    <p class="section-sub reveal">Bibliotecas de código aberto com licenças permissivas, adequadas para pesquisa acadêmica.</p>
 
-    <div class="stack-grid">
+    <div class="stack-grid reveal">
       <div class="stack-chip"><span class="chip-dot"></span>Python 3.9</div>
       <div class="stack-chip"><span class="chip-dot"></span>Streamlit 1.50</div>
-      <div class="stack-chip"><span class="chip-dot green"></span>PyVista 0.46</div>
-      <div class="stack-chip"><span class="chip-dot"></span>Plotly 6.9 (WebGL)</div>
-      <div class="stack-chip"><span class="chip-dot green"></span>scikit-image 0.24</div>
-      <div class="stack-chip"><span class="chip-dot purple"></span>reportlab 4.5</div>
-      <div class="stack-chip"><span class="chip-dot orange"></span>pydicom</div>
-      <div class="stack-chip"><span class="chip-dot orange"></span>tifffile</div>
-      <div class="stack-chip"><span class="chip-dot orange"></span>nibabel</div>
-      <div class="stack-chip"><span class="chip-dot green"></span>numpy · scipy</div>
+      <div class="stack-chip"><span class="chip-dot moss"></span>PyVista 0.46</div>
+      <div class="stack-chip"><span class="chip-dot"></span>Plotly 6.9 · WebGL</div>
+      <div class="stack-chip"><span class="chip-dot moss"></span>scikit-image 0.24</div>
+      <div class="stack-chip"><span class="chip-dot violet"></span>reportlab 4.5</div>
+      <div class="stack-chip"><span class="chip-dot amber"></span>pydicom</div>
+      <div class="stack-chip"><span class="chip-dot amber"></span>tifffile</div>
+      <div class="stack-chip"><span class="chip-dot amber"></span>nibabel</div>
+      <div class="stack-chip"><span class="chip-dot moss"></span>numpy · scipy</div>
       <div class="stack-chip"><span class="chip-dot"></span>Pillow 11.3</div>
     </div>
-
-    <p class="stack-note" style="margin-top: 24px;">
-      FORMATOS SUPORTADOS &nbsp;·&nbsp; DICOM (pasta .dcm) · TIFF stack · NIfTI (.nii / .nii.gz)
-    </p>
+    <p class="stack-note reveal">FORMATOS · DICOM (pasta .dcm) · TIFF stack · NIfTI (.nii / .nii.gz)</p>
   </div>
 </section>
 
-<!-- ══ VÍNCULO INSTITUCIONAL ════════════════════════════════════════════ -->
-<section id="institucional" class="section">
+<!-- ══ INSTITUCIONAL ════════════════════════════════════ -->
+<section id="institucional" class="section alt">
   <div class="container">
-    <div class="section-label">Vínculo institucional</div>
-    <h2 class="section-title">Pesquisa <span class="accent">USP/FOUSP</span></h2>
+    <div class="eyebrow reveal">Vínculo institucional</div>
+    <h2 class="section-title reveal">Pesquisa <span class="accent">USP / FOUSP</span></h2>
 
-    <div class="institution-grid">
+    <div class="institution-grid reveal">
       <div class="institution-item">
         <div class="institution-label">Instituição</div>
         <div class="institution-value">Faculdade de Odontologia da USP</div>
@@ -596,40 +467,48 @@
       </div>
       <div class="institution-item">
         <div class="institution-label">Contato</div>
-        <div class="institution-value">
-          <a href="mailto:abefisio@usp.br">abefisio@usp.br</a>
-        </div>
+        <div class="institution-value"><a href="mailto:abefisio@usp.br">abefisio@usp.br</a></div>
         <div class="institution-sub">Para colaborações científicas e dúvidas</div>
       </div>
       <div class="institution-item">
         <div class="institution-label">Código-fonte</div>
-        <div class="institution-value">
-          <a href="https://github.com/Abefisio" target="_blank" rel="noopener">github.com/Abefisio</a>
-        </div>
+        <div class="institution-value"><a href="https://github.com/Abefisio" target="_blank" rel="noopener">github.com/Abefisio</a></div>
         <div class="institution-sub">Repositório público · licença acadêmica</div>
       </div>
     </div>
 
-    <div class="hosting-notice">
-      ◈ &nbsp;HOSPEDAGEM PROVISÓRIA — este site encontra-se temporariamente hospedado fora
-      da infraestrutura definitiva da USP. A URL e o domínio definitivos serão informados
-      quando a hospedagem institucional estiver disponível.
+    <div class="hosting-notice reveal">
+      [hospedagem provisória] este site encontra-se temporariamente hospedado fora da infraestrutura definitiva da USP. A URL e o domínio definitivos serão informados quando a hospedagem institucional estiver disponível.
     </div>
   </div>
 </section>
 
-<!-- ══ RODAPÉ ════════════════════════════════════════════════════════════ -->
+<!-- ══ CTA FINAL ════════════════════════════════════════ -->
+<section id="cta" class="section">
+  <div class="grid-bg"></div>
+  <div class="glow"></div>
+  <div class="container">
+    <div class="eyebrow reveal">Comece agora</div>
+    <h2 class="section-title reveal">Explore a plataforma</h2>
+    <p class="section-sub reveal" style="margin-bottom: 30px;">Acesse o app e valide com o volume sintético, ou envie seu próprio micro-CT.</p>
+    <div class="hero-cta reveal" style="justify-content:center;">
+      <a href="#" class="btn-cta lg">Acessar o app</a>
+      <a href="https://github.com/Abefisio/dcubic-app" class="btn-outline lg" target="_blank" rel="noopener">Ver no GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RODAPÉ ═══════════════════════════════════════════ -->
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <a href="#" class="footer-logo logo" style="text-decoration:none;">
+      <a href="#hero" class="footer-logo logo">
         <div class="logo-badge" style="width:28px;height:28px;font-size:14px;">D<sup style="font-size:8px;">3</sup></div>
-        <div class="logo-text">
-          <div class="logo-name" style="font-size:13px;">DCUBIC</div>
-          <div class="logo-sub">IMAGE ANALYSIS</div>
+        <div>
+          <div class="brand-name" style="font-size:14px;">DCUBIC</div>
+          <div class="brand-sub">IMAGE ANALYSIS</div>
         </div>
       </a>
-
       <div class="footer-links">
         <a href="#sobre">O que é</a>
         <a href="#funcionalidades">Funcionalidades</a>
@@ -637,14 +516,30 @@
         <a href="https://github.com/Abefisio" target="_blank" rel="noopener">GitHub</a>
         <a href="mailto:abefisio@usp.br">Contato</a>
       </div>
-
       <div class="footer-right">
-        USP/FOUSP · Pesquisa acadêmica<br>
-        Software livre · Uso não comercial
+        © 2026 DCUBIC · USP/FOUSP · pesquisa acadêmica<br>
+        software livre · uso não comercial
       </div>
     </div>
   </div>
 </footer>
+
+<script>
+  // Placeholder limpo se um screenshot não carregar (preview fora da pasta do site)
+  document.querySelectorAll('img[data-shot]').forEach(function (img) {
+    img.addEventListener('error', function () {
+      var ph = document.createElement('div');
+      ph.className = 'shot-ph';
+      ph.textContent = img.getAttribute('alt') || 'screenshot';
+      img.replaceWith(ph);
+    });
+  });
+  // Reveal on scroll
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+</script>
 
 </body>
 </html>
