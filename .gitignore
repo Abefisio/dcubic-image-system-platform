@@ -2,6 +2,7 @@
 !/.gitignore
 !/.assetsignore
 !/_headers
+!/wrangler.jsonc
 !/index.html
 !/README.md
 !/screenshots/

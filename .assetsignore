@@ -3,3 +3,6 @@
 .assetsignore
 .netlifyignore
 README.md
+wrangler.jsonc
+_headers
+.wrangler
