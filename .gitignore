@@ -1,0 +1,9 @@
+/*
+!/.gitignore
+!/.assetsignore
+!/_headers
+!/index.html
+!/README.md
+!/screenshots/
+!/videos/
+/videos/*.mov
