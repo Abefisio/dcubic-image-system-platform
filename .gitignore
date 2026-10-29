@@ -8,3 +8,5 @@
 !/screenshots/
 !/videos/
 /videos/*.mov
+
+.claude/
