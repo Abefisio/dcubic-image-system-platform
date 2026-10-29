@@ -10,3 +10,4 @@
 /videos/*.mov
 
 .claude/
+!/DOMINIO.md
