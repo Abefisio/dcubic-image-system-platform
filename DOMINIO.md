@@ -1,8 +1,9 @@
-# Domínio do site de apresentação do DCubic
+# Domínio do site de apresentação do ENDO ATLAS 3D
 
 Data do registro: 29/10/2026
 
-- Endereço oficial do site: https://dcubic.reloadcursos.com
+- Endereço oficial do site: https://endoatlas3d.reloadcursos.com (desde 26/11/2026)
+- Endereço antigo, mantido ativo para não quebrar links já divulgados: https://dcubic.reloadcursos.com
 - Reserva (workers.dev): https://dcubic-image-system-platform.abedrdador.workers.dev
 - Aplicativo (VPS): https://app.dcubic.reloadcursos.com
 

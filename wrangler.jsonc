@@ -3,5 +3,8 @@
   "compatibility_date": "2026-09-11",
   "assets": { "directory": "." },
   "workers_dev": true,
-  "routes": [ { "pattern": "dcubic.reloadcursos.com", "custom_domain": true } ]
+  "routes": [
+    { "pattern": "endoatlas3d.reloadcursos.com", "custom_domain": true },
+    { "pattern": "dcubic.reloadcursos.com", "custom_domain": true }
+  ]
 }
