@@ -6,7 +6,7 @@ Data do registro: 29/10/2026
 - Endereço antigo, mantido ativo para não quebrar links já divulgados: https://dcubic.reloadcursos.com
 - Reserva (workers.dev): https://dcubic-image-system-platform.abedrdador.workers.dev
 - Aplicativo (VPS): https://app.endoatlas3d.reloadcursos.com (desde 26/11/2026)
-- Endereço antigo do aplicativo, mantido ativo: https://app.dcubic.reloadcursos.com
+- Endereço antigo do aplicativo: https://app.dcubic.reloadcursos.com redireciona (302, Traefik na VPS) para o novo desde 26/11/2026
 
 Observações:
 - O domínio próprio é configurado em `wrangler.jsonc` (`routes` com `custom_domain`); o registro DNS é criado pelo Cloudflare no deploy.
