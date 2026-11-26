@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DCubic Image System Platform</title>
+<title>ENDO ATLAS 3D</title>
 <meta name="description" content="Plataforma de análise quantitativa de volumes 3D micro-CT para pesquisa odontológica. USP/FOUSP — uso acadêmico, sem fins comerciais.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,7 +83,7 @@
     box-shadow: 0 0 16px rgba(0,194,201,.45);
   }
   .logo-badge sup { font-size: 9px; }
-  .brand-name { font-weight: 800; font-size: 16px; letter-spacing: .5px; color: #fff; line-height: 1; }
+  .brand-name { font-weight: 800; font-size: 16px; letter-spacing: .5px; color: #fff; line-height: 1; white-space: nowrap; }
   .brand-sub { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 2px; color: #6f86a8; margin-top: 3px; }
   .header-sep { width: 1px; height: 26px; background: var(--border-dark); }
   nav { display: flex; gap: 2px; margin-left: auto; }
@@ -257,6 +257,10 @@
 
   @media (max-width: 820px) {
     nav { display: none; }
+    /* nome ENDO ATLAS 3D em uma linha no celular, sem rolagem horizontal */
+    header { gap: 12px; }
+    .header-sep { display: none; }
+    .brand-name { font-size: 14px; }
     .hero-inner { grid-template-columns: 1fr; gap: 36px; }
     .feature-row { grid-template-columns: 1fr; gap: 24px; padding: 36px 0; }
     .feature-row.rev .feature-media { order: 0; }
@@ -274,7 +278,7 @@
   <a href="#hero" class="logo">
     <div class="logo-badge">D<sup>3</sup></div>
     <div>
-      <div class="brand-name">DCUBIC</div>
+      <div class="brand-name">ENDO ATLAS 3D</div>
       <div class="brand-sub">IMAGE ANALYSIS</div>
     </div>
   </a>
@@ -308,7 +312,7 @@
         </div>
         <div class="hero-stats">
           <div class="hero-stat"><div class="v">3</div><div class="l">Formatos · DICOM/TIFF/NIfTI</div></div>
-          <div class="hero-stat"><div class="v">4</div><div class="l">Módulos integrados</div></div>
+          <div class="hero-stat"><div class="v">3</div><div class="l">Módulos integrados</div></div>
           <div class="hero-stat"><div class="v">mm³</div><div class="l">Métricas morfométricas</div></div>
         </div>
       </div>
@@ -328,26 +332,14 @@
 <section id="funcionalidades" class="section alt">
   <div class="container">
     <div class="eyebrow reveal">Funcionalidades</div>
-    <h2 class="section-title reveal">Quatro módulos <span class="accent">integrados</span></h2>
+    <h2 class="section-title reveal">Três módulos <span class="accent">integrados</span></h2>
     <p class="section-sub reveal">Todas as funcionalidades operam sobre os voxels brutos — as configurações visuais nunca alteram os dados.</p>
 
     <div style="margin-top: 44px;">
 
-      <div class="feature-row reveal">
-        <div>
-          <div class="feature-tag">// módulo 01 — triplanar 2D</div>
-          <div class="feature-title">Visualização triplanar em escala de cinza</div>
-          <p class="feature-desc">Cortes axial, sagital e coronal com escala de cinza global e crosshair sincronizado entre os três planos. Navegação por índice de voxel com sliders independentes.</p>
-        </div>
-        <div class="feature-media">
-          <div class="frame"><img data-shot src="screenshots/screen_triplanar.png" alt="Triplanar 2D · crosshair sincronizado"></div>
-          <div class="tick-b"></div>
-        </div>
-      </div>
-
       <div class="feature-row rev reveal">
         <div>
-          <div class="feature-tag">// módulo 02 — segmentação</div>
+          <div class="feature-tag">// módulo 01 — segmentação</div>
           <div class="feature-title">Segmentação multi-tecido por threshold</div>
           <p class="feature-desc">Limiarização independente para fundo, tecido mole, esmalte/osso e núcleo denso. Overlay RGBA em tempo real sobre os voxels brutos, com contagem por compartimento.</p>
         </div>
@@ -359,7 +351,7 @@
 
       <div class="feature-row reveal">
         <div>
-          <div class="feature-tag">// módulo 03 — render 3D</div>
+          <div class="feature-tag">// módulo 02 — render 3D</div>
           <div class="feature-title">Render 3D interativo via marching cubes</div>
           <p class="feature-desc">Malhas 3D geradas por marching cubes a partir dos masks de voxels brutos. Visualização WebGL (Plotly Mesh3d) com rotação, zoom e pan no navegador. Opacidade por tecido e plano de corte Z ajustáveis.</p>
         </div>
@@ -371,7 +363,7 @@
 
       <div class="feature-row rev reveal">
         <div>
-          <div class="feature-tag">// módulo 04 — métricas &amp; export</div>
+          <div class="feature-tag">// módulo 03 — métricas &amp; export</div>
           <div class="feature-title">Métricas quantitativas e exportação</div>
           <p class="feature-desc">Volume (mm³) por contagem de voxels, área de superfície (mm²) por soma de triângulos e distância euclidiana entre dois pontos. Exportação STL/OBJ por tecido e relatório PDF.</p>
         </div>
@@ -389,10 +381,10 @@
 <section id="sobre" class="section">
   <div class="container">
     <div class="eyebrow reveal">O que é</div>
-    <h2 class="section-title reveal">Sobre o <span class="accent">projeto DCubic</span></h2>
+    <h2 class="section-title reveal">Sobre o <span class="accent">projeto ENDO ATLAS 3D</span></h2>
 
     <div class="about-text reveal">
-      <p>O <strong>DCubic Image System Platform</strong> é uma plataforma computacional de código aberto para a análise quantitativa de volumes tridimensionais obtidos por microtomografia computadorizada (micro-CT), no contexto da pesquisa odontológica da <strong>Faculdade de Odontologia da Universidade de São Paulo (FOUSP/USP)</strong>.</p>
+      <p>O <strong>ENDO ATLAS 3D</strong> é uma plataforma computacional de código aberto para a análise quantitativa de volumes tridimensionais obtidos por microtomografia computadorizada (micro-CT), no contexto da pesquisa odontológica da <strong>Faculdade de Odontologia da Universidade de São Paulo (FOUSP/USP)</strong>.</p>
       <p>Permite a visualização triplanar de volumes DICOM, TIFF e NIfTI, a segmentação interativa de tecidos por limiar de intensidade e a geração de métricas morfométricas rigorosas — volume (mm³) e área de superfície (mm²) por compartimento tecidual — em conformidade com os princípios de integridade de dados científicos.</p>
       <p>Desenvolvida inteiramente com bibliotecas de código aberto, destina-se exclusivamente à pesquisa acadêmica sem fins comerciais. Todo o pipeline respeita um princípio fundamental de separação entre dado bruto e exibição visual.</p>
     </div>
@@ -410,7 +402,7 @@
     <h2 class="section-title reveal">Separação <span class="accent">dado × exibição</span></h2>
 
     <div class="principle-box reveal">
-      <div class="principle-head"><span class="d r"></span><span class="d y"></span><span class="d g"></span>&nbsp; dcubic · core-principle.spec</div>
+      <div class="principle-head"><span class="d r"></span><span class="d y"></span><span class="d g"></span>&nbsp; endo-atlas-3d · core-principle.spec</div>
       <div class="principle-body">
         <div class="principle-number">PRINCÍPIO 1 · INVIOLÁVEL</div>
         <div class="principle-title">Os dados brutos nunca são alterados.</div>
@@ -506,7 +498,7 @@
       <a href="#hero" class="footer-logo logo">
         <div class="logo-badge" style="width:28px;height:28px;font-size:14px;">D<sup style="font-size:8px;">3</sup></div>
         <div>
-          <div class="brand-name" style="font-size:14px;">DCUBIC</div>
+          <div class="brand-name" style="font-size:14px;">ENDO ATLAS 3D</div>
           <div class="brand-sub">IMAGE ANALYSIS</div>
         </div>
       </a>
@@ -518,7 +510,7 @@
         <a href="mailto:abefisio@usp.br">Contato</a>
       </div>
       <div class="footer-right">
-        © 2026 DCUBIC · USP/FOUSP · pesquisa acadêmica<br>
+        © 2026 ENDO ATLAS 3D · USP/FOUSP · pesquisa acadêmica<br>
         software livre · uso não comercial
       </div>
     </div>
